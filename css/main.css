@@ -4,6 +4,7 @@
 
 :root {
     --primary-color: #ff5e61;
+    --secondary-color: #fcc7d6;
 }
 
 body {
@@ -22,62 +23,100 @@ body {
     align-items: center;
     gap: 50px;
     width: 100%;
+    padding: 20px;
+    position: relative;
+}
+
+.all-menu {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+header.container {
+    position: fixed;
+    top: 0%;
+    z-index: 1;
+    background-color: #fff;
 }
 
 main.container {
     flex-direction: column;
-    justify-content: flex-end;
-    min-height: calc(100% - 80px);
+    justify-content: flex-start;
+    align-items: center;
+    min-height: calc(100vh - 120px);
 }
 
-.container > *:first-child {
-    margin-right: auto;
-}
 .logo {
+    margin-right: auto;
     max-height: 40px;
 }
 
-.menu {
+.main-mennu {
     display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    padding: 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    transform: translateY(95%);
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 6px 4px -6px #0004;
+}
+
+.menu-visibile .main-mennu {
+    display: flex;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
     gap: 20px;
 }
 
 .menu > a {
     color: #000;
-    font-size: 20px;
     text-decoration: none;
 }
 
-.icon {
-    display: flex;
-    gap: 20px;
+.menu > a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
 }
 
-.icon > a {
-    color: #000;
-    text-decoration: none;
+.hamburger {
+    font-size: 2em;
 }
 
 .galery {
-    width: 60%;
     padding: 0 0.7em;
     font-size: 40px;
     position: relative;
 }
 
-.galery > img {
+.galery > picture {
+    width: 100%;
+}
+
+.galery > picture > img {
     width: 100%;
 }
 
 .galery > .fa {
     position: absolute;
     top: 50%;
-    transform: translate(-50%);
-    width: 1.3em;
-    height: 1.3em;
-    line-height: 1.3em;
+    transform: translateY(-50%);
+    width: 1.4em;
+    height: 1.4em;
+    line-height: 1.4em;
     font-size: 30px;
     text-align: center;
+    color: #fff;
     background-color: var(--primary-color);
     border-radius: 50%;
 }
@@ -100,68 +139,68 @@ main.container {
 .text > .category {
     color: var(--primary-color);
     font-weight: bold;
-    font-size: 17px;
+    font-size: 27px;
 }
-text > .title {
+.text > .title {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 40px;
     font-weight: 900;
     letter-spacing: -1px;
-}
-text > .description {
+    margin: 0px;
 }
 .text > .contains {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    flex-wrap: wrap;
+    gap: 20px 20px;
 }
 .text > .contains > .list {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-.text > .list > .list-title {
+.list > .list-title {
     font-size: 17px;
 }
-.text > .list > .list-plus {
+.list > .list-plus {
     display: flex;
     flex-direction: column;
     gap: 10px;
     list-style-type: none;
 }
-.text > .list-plus > .li {
+.list > .list-plus > li {
     line-height: 20px;
 }
-.text > .list-plus > .li::before {
+.list > .list-plus > li::before {
     content: '+';
     margin-right: 10px;
     color: var(--primary-color);
     font-size: 36px;
     vertical-align: bottom;
 }
-.text > .list > .list-image {
+.list > .list-image {
     display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
     list-style-type: none;
 }
-.text > .list-image {
-}
-.text > .list-image > .li {
+.list > .list-image > li {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50px;
-    height: 50px;
-    background-color: var(--primary-color);
+    width: 70px;
+    height: 70px;
+    background-color: var(--secondary-color);
     border-radius: 50%;
 }
-.text > .list-image > img {
+
+.text > .list-image img {
     width: 36px;
     height: 36px;
     object-fit: contain;
     object-position: center;
 }
-.text > form {
-}
+
 .text > form > button {
     padding: 1em 3em;
     line-height: 1em;
@@ -181,7 +220,7 @@ text > .description {
 
 @media (min-width: 480px) {
     .container {
-        width: 460px;
+        width: 440px;
     }
 }
 
@@ -189,14 +228,27 @@ text > .description {
     .container {
         width: 660px;
     }
-    .menu {
+    .menu-menu {
         display: flex;
+        flex-direction: row;
+        position: static;
+        transform: translateY(0);
+        box-shadow: none;
+    }
+    .main-mennu > .menu {
+        flex-direction: row;
     }
     .hamburger {
         display: none;
     }
     main.container {
-        flex-direction: column;
+        flex-direction: row;
+    }
+    .galery {
+        width: 55%;
+    }
+    .text {
+        width: 45%;
     }
 }
 
@@ -205,11 +257,15 @@ text > .description {
         width: 900px;
     }
     .text > .contains {
+        flex-direction: row;
     }
 }
 
 @media (min-width: 1200px) {
     .container {
         width: 1100px;
+    }
+    .menu {
+        flex-direction: row;
     }
 }
